@@ -1,5 +1,5 @@
 all:
-	git clone https://github.com/underdarkskies/btxcore
+	git clone https://github.com/BTXexplorer/btxcore
 	cd btxcore && git checkout master
 	cd btxcore && rm -rf .git # Delete .git folder to reduce space
 	cd btxcore && npm install --production
