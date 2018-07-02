@@ -1,0 +1,13 @@
+[Unit]
+Description=under btxcore
+
+[Service]
+ExecStart=/usr/bin/env nodejs --max_old_space_size=4096 /opt/under/btxcore/btxcore/bin/btxcored
+Restart=always
+RestartSec=5
+TimeoutStopSec=900
+User=btxcore
+WorkingDirectory=/opt/under/btxcore/home
+
+[Install]
+WantedBy=multi-user.target

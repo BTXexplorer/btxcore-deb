@@ -1,4 +1,4 @@
-/opt/under/ravencore/home/.ravencore/data/debug.log {
+/opt/under/btxcore/home/.btxcore/data/debug.log {
         rotate 7
         daily
         compress

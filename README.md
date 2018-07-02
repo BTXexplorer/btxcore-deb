@@ -1,7 +1,7 @@
-Ravencore-deb
+btxcore-deb
 ===========
-Packaging system to deploy Ravencoin Block Explorer
-**The current configuration of this repository creates deb packages suited to run on ubuntu, behind Cloudflare(snakeoil ssl only), and are customized for the domain https://ravencoin.network**
+Packaging system to deploy bitcore Block Explorer
+**The current configuration of this repository creates deb packages suited to run on ubuntu, behind Cloudflare(snakeoil ssl only), and are customized for the domain https://bitcore.network**
 
 Using the build environment 
 ------------------
@@ -12,31 +12,31 @@ $curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 $sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 $sudo apt-get update
 $sudo apt-get install -y docker-ce git make
-$git clone https://github.com/underdarkskies/ravencore-deb
-$cd ravencore-deb/rvn
+$git clone https://github.com/underdarkskies/btxcore-deb
+$cd btxcore-deb/btx
 $sudo make
 ````
-DEB file will appear in ravencore-deb/rvn/
+DEB file will appear in btxcore-deb/btx/
 
-Deploying a Ravencore Deb file
+Deploying a btxcore Deb file
 ------------------------------------
 Download your deb to the home directory of your ubuntu instance
 ````
-$sudo apt-get install -y apt-transport-https curl && sudo dpkg -i ravencore_<version>_amd64.deb
+$sudo apt-get install -y apt-transport-https curl && sudo dpkg -i btxcore_<version>_amd64.deb
 ##the above will show errors, running the next command resolves those errors##
 $sudo apt-get update && sudo apt-get -f install -y
 $cd /etc/nginx/sites-enabled
-$sudo ln -s ../sites-available/nginx-ravencore .
+$sudo ln -s ../sites-available/nginx-btxcore .
 $sudo rm default
 $sudo rm ../sites-available/default
 $sudo systemctl enable mongod.service
 $sudo service mongod start
-$sudo service ravencore restart
+$sudo service btxcore restart
 $sudo printf "[Service]\nExecStartPost=/bin/sleep 0.1\n" | sudo tee /etc/systemd/system/nginx.service.d/override.conf
 $sudo systemctl daemon-reload
 $sudo service nginx restart
 ````
-at this point the ravencore service and nginx will automatically launch and run even after reboot
+at this point the btxcore service and nginx will automatically launch and run even after reboot
 
 Optional: add a redirect from www.example.com to example.com
 ----
@@ -52,11 +52,11 @@ server {
 Helpful commands to manage your Deb based install:
 ----
 ````
-$sudo service ravencore start
-$sudo service ravencore stop
-$sudo service ravencore restart
-$sudo service ravencore status
-$journalctl -u ravencore
+$sudo service btxcore start
+$sudo service btxcore stop
+$sudo service btxcore restart
+$sudo service btxcore status
+$journalctl -u btxcore
 
 $sudo service nginx start
 $sudo service nginx stop
@@ -64,14 +64,14 @@ $sudo service nginx restart
 $sudo service nginx status
 journalctl -u nginx
 ````
-Undeploying a Ravencore Deb file
+Undeploying a btxcore Deb file
 ----
 ````
 $sudo apt-get install -y aptitude
-$sudo aptitude purge ravencore
+$sudo aptitude purge btxcore
 ````
-Updating Ravencore version
+Updating btxcore version
 ---------------------------------
-* Change version in git checkout in rvn/ravencore/Makefile
-* Create a new entry in rvn/ravencore/debian/changelog by using 'dch -i'
+* Change version in git checkout in btx/btxcore/Makefile
+* Create a new entry in btx/btxcore/debian/changelog by using 'dch -i'
 * Then build as usual

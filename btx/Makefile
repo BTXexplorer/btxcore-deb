@@ -1,4 +1,4 @@
-IMG_NAME=ravencore_build
+IMG_NAME=btxcore_build
 NO_CACHE=false
 
 .PHONY: clean
@@ -6,9 +6,9 @@ NO_CACHE=false
 all:
 	docker build --no-cache=$(NO_CACHE) --rm -t "$(IMG_NAME)" .
 	docker run --name="$(IMG_NAME)" -d "$(IMG_NAME)" /bin/true
-	docker export ravencore_build | tar --wildcards -x 'root/*.deb'
-	docker rm ravencore_build
-	docker rmi ravencore_build
+	docker export btxcore_build | tar --wildcards -x 'root/*.deb'
+	docker rm btxcore_build
+	docker rmi btxcore_build
 	mv ./root/*.deb ./
 	rmdir ./root
 

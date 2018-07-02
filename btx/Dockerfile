@@ -16,5 +16,5 @@ RUN apt-get update && \
 RUN apt-get update && \
     apt-get -qy install nodejs python3 make build-essential devscripts dh-systemd mongodb-org
 RUN npm install npm@latest -g
-ADD ravencore/ /root/ravencore
-RUN ( cd /root/ravencore && debuild -uc -us )
+ADD btxcore/ /root/btxcore
+RUN ( cd /root/btxcore && debuild -uc -us )

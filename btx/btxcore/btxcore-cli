@@ -1,0 +1,8 @@
+#!/bin/bash -e
+
+INSTALL_PATH="/opt/under/btxcore/"
+BIN=$(realpath "$INSTALL_PATH"/btxcore/node_modules/btxcore-node/bin/bitcore-*/bin/)
+DATA="$INSTALL_PATH/home/.btxcore/data"
+CONF="$DATA/btx.conf"
+
+exec "$BIN"/btx-cli --conf="$CONF" --datadir="$DATA" "$@"

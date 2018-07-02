@@ -2,7 +2,7 @@
   "network": "livenet",
   "port": 3001,
   "services": [
-    "ravend",
+    "bitcored",
     "web",
     "insight-api",
     "insight-ui"
@@ -19,21 +19,21 @@
     },
     "insight-api": {
       "routePrefix": "api",
-      "coinTicker" : "https://api.coinmarketcap.com/v1/ticker/ravencoin/?convert=USD",
-      "coinShort": "RVN",
+      "coinTicker" : "https://api.coinmarketcap.com/v1/ticker/bitcore/?convert=USD",
+      "coinShort": "BTX",
 	  "db": {
 		"host": "127.0.0.1",
 		"port": "27017",
-		"database": "raven-api-livenet",
+		"database": "btx-api-livenet",
 		"user": "",
 		"password": ""
 	  }
     },
-    "ravend": {
-      "sendTxLog": "/opt/under/ravencore/home/.ravencore/pushtx.log",
+    "bitcored": {
+      "sendTxLog": "/opt/under/btxcore/home/.btxcore/pushtx.log",
       "spawn": {
-        "datadir": "/opt/under/ravencore/home/.ravencore/data",
-        "exec": "/opt/under/ravencore/ravencore/node_modules/ravencore-node/bin/ravend",
+        "datadir": "/opt/under/btxcore/home/.btxcore/data",
+        "exec": "/opt/under/btxcore/btxcore/node_modules/btxcore-node/bin/bitcored",
         "rpcqueue": 1000,
         "rpcport": 8766,
         "zmqpubrawtx": "tcp://127.0.0.1:28332",

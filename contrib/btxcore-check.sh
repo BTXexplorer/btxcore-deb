@@ -4,10 +4,10 @@ import requests
 import sys
 import json
 
-COMPARE_URLS = ["ravencoin.network"]
+COMPARE_URLS = ["bitcore.network"]
 
-def check_ravencore(ravencore_url):
-    sync_url = "https://%s/api/sync" % ravencore_url
+def check_btxcore(btxcore_url):
+    sync_url = "https://%s/api/sync" % btxcore_url
     r = requests.get(sync_url, timeout=20)
     if r.status_code != 200:
         raise Exception("Status code of %s: %d" % (sync_url, r.status_code))
@@ -18,13 +18,13 @@ def check_ravencore(ravencore_url):
     except Exception as e:
         raise Exception("Failed to load %s: %s" % (sync_url, str(e)))
 
-def main(ravencore_url, compare_urls):
-    height1 = check_ravencore(ravencore_url)
+def main(btxcore_url, compare_urls):
+    height1 = check_btxcore(btxcore_url)
 
     height2 = None
     for compare_url in compare_urls:
         try:
-            height2 = check_ravencore(compare_url)
+            height2 = check_btxcore(compare_url)
             break
         except Exception as e:
             print("%s: %s" % (compare_url, str(e)))
@@ -32,22 +32,22 @@ def main(ravencore_url, compare_urls):
     if height2 == None:
         raise Exception("No available server for crosscheck")
 
-    print("%s: %d" %( ravencore_url, height1))
+    print("%s: %d" %( btxcore_url, height1))
     print("%s: %d" %( compare_url, height1))
 
     if height1 <= height2 - 2:
-        raise Exception("%s behind %s for two or more blocks!" % (ravencore_url, compare_url))
+        raise Exception("%s behind %s for two or more blocks!" % (btxcore_url, compare_url))
 
     if height1 > height2 +2:
-        raise Exception("%s forward %s for two or more blocks!" % (ravencore_url, compare_url))
+        raise Exception("%s forward %s for two or more blocks!" % (btxcore_url, compare_url))
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
-        print("Usage: %s <ravencore_url> <compare_1_url> <compare_n_url>" % sys.argv[0])
+        print("Usage: %s <btxcore_url> <compare_1_url> <compare_n_url>" % sys.argv[0])
         sys.exit(127)
 
     try:
-        ravencore_url = sys.argv[1]
+        btxcore_url = sys.argv[1]
 
         compare_urls = []
         for i in range(2, len(sys.argv)):
@@ -57,10 +57,10 @@ if __name__ == '__main__':
             else:
                 compare_urls.append(s)
 
-        print("Backend %s" % ravencore_url)
+        print("Backend %s" % btxcore_url)
         print("Comparing to %s" % compare_urls)
 
-        ret = main(ravencore_url, compare_urls)
+        ret = main(btxcore_url, compare_urls)
     except Exception as e:
         print(str(e))
         print("Error")

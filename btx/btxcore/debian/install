@@ -1,0 +1,6 @@
+btxcore /opt/under/btxcore
+btxcore-cli /usr/bin
+btxcore-daemon /usr/bin
+btx.conf /opt/under/btxcore/home/.btxcore/data
+btxcore-node.json /opt/under/btxcore/home/.btxcore
+nginx-btxcore /etc/nginx/sites-available

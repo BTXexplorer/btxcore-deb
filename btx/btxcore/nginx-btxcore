@@ -2,13 +2,13 @@ server {
     listen 80;
     listen 443 ssl;
 
-    server_name ravencoin.network;
+    server_name bitcore.network;
 
     include snippets/snakeoil.conf;
 
-    root /home/ravencore/www;
-    access_log /var/log/nginx/ravencore-access.log;
-    error_log /var/log/nginx/ravencore-error.log;
+    root /home/btxcore/www;
+    access_log /var/log/nginx/btxcore-access.log;
+    error_log /var/log/nginx/btxcore-error.log;
 
     location / {
         proxy_pass http://127.0.0.1:3001;
@@ -29,8 +29,8 @@ server {
        return 200 "User-agent: *\nallow: /\n";
     }
 
-    location /ravencore-hostname.txt {
-        alias /var/www/html/ravencore-hostname.txt;
+    location /btxcore-hostname.txt {
+        alias /var/www/html/btxcore-hostname.txt;
     }
 
     set_real_ip_from 103.21.244.0/22;
